@@ -1,31 +1,89 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 
-export default function TabOneScreen() {
+import Timer from '@/components/timer/Timer';
+
+import PomodoroConfig from '@/components/pomodoro/PomodoroConfig';
+
+import PomodoroControls from '@/components/pomodoro/PomodoroControls';
+
+import { usePomodoro } from '@/hooks/usePomodoro';
+
+export default function TabTwoScreen() {
+
+  const {
+    config,
+    mode,
+    interval,
+    time,
+    isRunning,
+    workIntervalMinutes,
+    updateConfig,
+    start,
+    pause,
+    reset,
+
+  } = usePomodoro();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+
+      {/* Configuración */}
+
+      <PomodoroConfig
+        config={config}
+        onChange={updateConfig}
+        disabled={isRunning}
+      />
+
+      {/* Estado */}
+
+      <Text style={styles.mode}>
+        {mode === 'work'
+          ? 'Trabajo'
+          : 'Descanso'}
+      </Text>
+
+      {/* Timer */}
+
+      <Timer time={time} />
+
+      {/* Controles */}
+
+      <PomodoroControls
+        isRunning={isRunning}
+        onStart={start}
+        onPause={pause}
+        onReset={reset}
+      />
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+    gap: 15
   },
+
   title: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+
+  mode: {
+    fontSize: 22,
+    fontWeight: 'bold',
   },
+
+  message:{
+    fontSize: 20
+  }
+
 });
