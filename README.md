@@ -157,7 +157,3 @@ En desarrollo.
 La versión actual establece la estructura base del temporizador Pomodoro y permite configurar el tiempo de trabajo, cantidad de descansos y duración de los descansos.
 
 La arquitectura está preparada para incorporar nuevas funcionalidades sin concentrar toda la lógica en la pantalla principal.
-
-## Licencia
-
-Este proyecto puede ser distribuido y modificado de acuerdo con los términos de la licencia definida en el repositorio.
